@@ -1,61 +1,68 @@
-# code-with-quarkus
+# Live coding not work demo
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+1. Run the project with `mvn quarkus:dev`
+2. Visit htpp://localhost:8080/hello
+3. Edit code, for example, change return value from "Hello" to "hi"
+4. Then you will see the following error:
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
-## Running the application in dev mode
+```bash
+java.lang.RuntimeException: Unable to invoke Kotlin compiler. java.lang.NoSuchMethodError: 'void org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrar$Companion.registerExtension(com.intellij.openapi.project.Project, org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrar)'
+	at org.jetbrains.kotlin.allopen.AllOpenComponentRegistrar.registerProjectComponents(AllOpenPlugin.kt:57)
+	at org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment$Companion.registerExtensionsFromPlugins$cli(KotlinCoreEnvironment.kt:671)
+	at org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment$ProjectEnvironment.registerExtensionsFromPlugins(KotlinCoreEnvironment.kt:162)
+	at org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment$Companion.configureProjectEnvironment(KotlinCoreEnvironment.kt:572)
+	at org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment.<init>(KotlinCoreEnvironment.kt:192)
+	at org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment.<init>(KotlinCoreEnvironment.kt:107)
+	at org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment$Companion.createForProduction(KotlinCoreEnvironment.kt:442)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.createCoreEnvironment(K2JVMCompiler.kt:202)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(K2JVMCompiler.kt:153)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(K2JVMCompiler.kt:53)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(CLICompiler.kt:100)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(CLICompiler.kt:46)
+	at org.jetbrains.kotlin.cli.common.CLITool.exec(CLITool.kt:101)
+	at io.quarkus.kotlin.deployment.KotlinCompilationProvider.compile(KotlinCompilationProvider.java:93)
+	at io.quarkus.deployment.dev.QuarkusCompiler.compile(QuarkusCompiler.java:226)
+	at io.quarkus.deployment.dev.RuntimeUpdatesProcessor.checkForChangedClasses(RuntimeUpdatesProcessor.java:725)
+	at io.quarkus.deployment.dev.RuntimeUpdatesProcessor.doScan(RuntimeUpdatesProcessor.java:461)
+	at io.quarkus.deployment.dev.RuntimeUpdatesProcessor.doScan(RuntimeUpdatesProcessor.java:441)
+	at io.quarkus.vertx.http.runtime.devmode.VertxHttpHotReplacementSetup$4.handle(VertxHttpHotReplacementSetup.java:152)
+	at io.quarkus.vertx.http.runtime.devmode.VertxHttpHotReplacementSetup$4.handle(VertxHttpHotReplacementSetup.java:139)
+	at io.vertx.core.impl.ContextBase.lambda$null$0(ContextBase.java:137)
+	at io.vertx.core.impl.ContextInternal.dispatch(ContextInternal.java:264)
+	at io.vertx.core.impl.ContextBase.lambda$executeBlocking$1(ContextBase.java:135)
+	at org.jboss.threads.ContextHandler$1.runWith(ContextHandler.java:18)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2513)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1538)
+	at org.jboss.threads.DelegatingRunnable.run(DelegatingRunnable.java:29)
+	at org.jboss.threads.ThreadLocalResettingRunnable.run(ThreadLocalResettingRunnable.java:29)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
+	at io.quarkus.kotlin.deployment.KotlinCompilationProvider.compile(KotlinCompilationProvider.java:99)
+	at io.quarkus.deployment.dev.QuarkusCompiler.compile(QuarkusCompiler.java:226)
+	at io.quarkus.deployment.dev.RuntimeUpdatesProcessor.checkForChangedClasses(RuntimeUpdatesProcessor.java:725)
+	at io.quarkus.deployment.dev.RuntimeUpdatesProcessor.doScan(RuntimeUpdatesProcessor.java:461)
+	at io.quarkus.deployment.dev.RuntimeUpdatesProcessor.doScan(RuntimeUpdatesProcessor.java:441)
+	at io.quarkus.vertx.http.runtime.devmode.VertxHttpHotReplacementSetup$4.handle(VertxHttpHotReplacementSetup.java:152)
+	at io.quarkus.vertx.http.runtime.devmode.VertxHttpHotReplacementSetup$4.handle(VertxHttpHotReplacementSetup.java:139)
+	at io.vertx.core.impl.ContextBase.lambda$null$0(ContextBase.java:137)
+	at io.vertx.core.impl.ContextInternal.dispatch(ContextInternal.java:264)
+	at io.vertx.core.impl.ContextBase.lambda$executeBlocking$1(ContextBase.java:135)
+	at org.jboss.threads.ContextHandler$1.runWith(ContextHandler.java:18)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2513)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1538)
+	at org.jboss.threads.DelegatingRunnable.run(DelegatingRunnable.java:29)
+	at org.jboss.threads.ThreadLocalResettingRunnable.run(ThreadLocalResettingRunnable.java:29)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
-## Packaging and running the application
-
-The application can be packaged using:
-```shell script
-./mvnw package
+## Build tool
+```bash
+Maven home: C:\apache-maven-3.9.0
+Java version: 19.0.1, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk-19
+Default locale: en_US, platform encoding: UTF-8
+OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
 ```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
-
-## Related Guides
-
-- RESTEasy Reactive ([guide](https://quarkus.io/guides/resteasy-reactive)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- Kotlin ([guide](https://quarkus.io/guides/kotlin)): Write your services in Kotlin
-
-## Provided Code
-
-### RESTEasy Reactive
-
-Easily start your Reactive RESTful Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
